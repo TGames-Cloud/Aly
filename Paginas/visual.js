@@ -21,15 +21,17 @@ const ui = {
             <div class="reloj-caja"><span class="reloj-num">${s.v}</span><span class="reloj-lab">${s.l}</span></div>
         `).join('');
     },
-    renderMenu: () => {
-        const menu = document.getElementById('menu-carpetas');
-        menu.innerHTML = Object.keys(ALMACEN.carpetas).map(cat => `
-            <div class="carpeta-item" onclick="ui.abrirCarpeta('${cat}')">
+renderMenu: () => {
+    const menu = document.getElementById('menu-carpetas');
+    menu.innerHTML = Object.keys(ALMACEN.carpetas).map(cat => `
+        <div class="carpeta-item" onclick="ui.abrirCarpeta('${cat}')">
+            <div class="carpeta-wrapper">
                 <span style="font-size: 60px;">📂</span>
-                <p style="font-weight:bold;">${cat}</p>
             </div>
-        `).join('');
-    },
+            <p style="font-weight:bold; margin-top:10px;">${cat}</p>
+        </div>
+    `).join('');
+},
     abrirCarpeta: (n) => {
         document.getElementById('vista-inicio').style.display = 'none';
         document.getElementById('vista-carpeta').style.display = 'block';
