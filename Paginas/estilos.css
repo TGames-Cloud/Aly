@@ -6,11 +6,10 @@
 }
 
 * { box-sizing: border-box; }
-
 body {
     margin: 0; background: #fff0f3;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    overflow: hidden; /* Solo scroll en las cartas */
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
 }
 
 /* TOP BAR */
@@ -24,86 +23,82 @@ body {
     background: white; border: 3px solid var(--rosa);
     padding: 15px; border-radius: 50%; cursor: pointer;
     box-shadow: 0 10px 20px rgba(0,0,0,0.1); position: relative;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.widget:hover { transform: scale(1.1); }
+
+/* CORRECCIÓN DE PANELES */
 .popover {
     position: absolute; top: 80px; background: white;
     border: 3px solid var(--rosa); border-radius: 20px;
     padding: 20px; width: 280px; display: none;
     box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    animation: slideIn 0.4s ease-out;
 }
 
-.musica-widget .popover { right: 0; }
+/* Dinero (Esquina Izquierda -> Abre a la derecha) */
+.dinero-widget .popover { left: 0; }
 
-/* CONTENEDORES */
+/* Música (Esquina Derecha -> Abre a la IZQUIERDA) */
+.musica-widget .popover { right: 0; transform-origin: top right; }
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-20px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* REPRODUCTOR ESTILIZADO */
+.controles-musica { display: flex; justify-content: center; gap: 15px; margin: 15px 0; }
+.controles-musica button {
+    background: var(--rosa); color: white; border: none;
+    width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+    transition: background 0.3s;
+}
+.controles-musica button:hover { background: #ff758f; }
+
+/* CONTADOR Y CARTAS */
 .contenedor-principal {
     margin-top: 120px; text-align: center; padding: 20px;
+    animation: fadeIn 1s ease-in;
 }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 .contador-card {
     background: rgba(255, 255, 255, 0.9);
     border: 4px solid var(--rosa); border-radius: 50px;
     display: inline-flex; padding: 30px; gap: 20px;
+    box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
 }
 
 .reloj-caja {
     background: white; border: 2px solid var(--rosa-suave);
-    padding: 20px; border-radius: 25px; min-width: 110px;
+    padding: 20px; border-radius: 25px; min-width: 100px;
+    transition: all 0.3s ease;
 }
+.reloj-caja:hover { border-color: var(--rosa); transform: translateY(-5px); }
 
-.reloj-num { display: block; font-size: 2.5rem; font-weight: bold; color: var(--rosa); }
-.reloj-lab { color: #888; text-transform: uppercase; font-size: 0.8rem; }
-
-/* CARPETAS Y CARTAS */
-.grid-carpetas, .grid-cartas {
-    display: flex; justify-content: center; gap: 40px; margin-top: 50px; flex-wrap: wrap;
-}
-
-.carpeta-item { cursor: pointer; transition: 0.3s; }
-.carpeta-item:hover { transform: scale(1.1); }
-.carpeta-icon { font-size: 80px; display: block; }
-
+/* DISEÑO DE CARTAS */
 .carta-mini {
     background: white; border: 3px solid var(--rosa-suave);
     padding: 25px; border-radius: 20px; width: 250px;
     position: relative; cursor: pointer; text-align: left;
+    transition: all 0.3s ease;
+}
+.carta-mini:hover { 
+    transform: translateY(-10px) rotate(2deg); 
+    border-color: var(--rosa);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
 
-.tag-nueva {
-    position: absolute; top: -10px; right: -10px;
-    background: var(--rosa); color: white; padding: 5px 15px;
-    border-radius: 20px; font-size: 0.7rem; font-weight: bold;
-    animation: latido 1.5s infinite;
-}
-
-/* OVERLAY */
-#overlay-lectura {
-    position: fixed; inset: 0; background: var(--oscuro);
-    display: none; justify-content: center; align-items: center; z-index: 2000;
-}
-
+/* OVERLAY LECTURA */
 .carta-fisica {
     background: var(--crema); border: 5px solid var(--rosa);
     width: 90%; max-width: 600px; height: 80vh;
     padding: 50px; border-radius: 30px; position: relative;
     display: flex; flex-direction: column;
+    animation: zoomIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.lectura-cuerpo {
-    overflow-y: auto; flex-grow: 1; font-size: 1.3rem; line-height: 1.8;
-}
-
-.btn-leido {
-    background: #2ecc71; color: white; border: none;
-    padding: 20px; border-radius: 15px; font-weight: bold;
-    margin-top: 20px; cursor: pointer;
-}
-
-@keyframes latido { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-
-.corazon-lluvia {
-    position: absolute; color: var(--rosa-suave); top: -10vh;
-    pointer-events: none; animation: lluvia linear forwards;
-}
-
-@keyframes lluvia { to { transform: translateY(110vh); } }
+@keyframes zoomIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
