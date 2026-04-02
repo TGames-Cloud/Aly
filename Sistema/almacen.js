@@ -2,7 +2,7 @@ const ALMACEN = {
     presupuesto: "B/. 50.00", //
     fechaRelacion: new Date(2024, 11, 3, 17, 43), //
     playlist: [
-        { id: "L0MK7qz13bU", titulo: "Frozen - Let It Go" },
+        { id: "XSqx8Ibkzrk&list=RDXSqx8Ibkzrk&start_radio=1", titulo: "Line Without a Hook" },
         { id: "dQw4w9WgXcQ", titulo: "Never Gonna Give You Up" }
     ],
     carpetas: {
