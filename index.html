@@ -18,19 +18,25 @@
             </div>
         </div>
 
-        <div class="widget musica-widget" onclick="ui.toggleMusica()">
-            <span class="icon">🎵</span>
-            <div id="popover-musica" class="popover" onclick="event.stopPropagation()">
-                <div id="player"></div>
-                <div class="controles-musica">
-                    <button onclick="musica.prev()">⏮</button>
-                    <button onclick="musica.playPause()">⏯</button>
-                    <button onclick="musica.next()">⏭</button>
-                </div>
+<div class="widget musica-widget" onclick="ui.toggleMusica()">
+    <span class="icon">🎵</span>
+    <div id="popover-musica" class="popover" onclick="event.stopPropagation()">
+        <div id="player"></div> <div class="reproductor-layout">
+            <p id="track-titulo" class="musica-nombre">Cargando...</p>
+            
+            <div class="controles-musica">
+                <button onclick="musica.prev()" title="Anterior">⏮</button>
+                <button onclick="musica.playPause()" id="btn-play-pause" title="Play/Pausa">⏯</button>
+                <button onclick="musica.next()" title="Siguiente">⏭</button>
+            </div>
+
+            <div class="volumen-container">
+                <span class="vol-icon">🔊</span>
                 <input type="range" min="0" max="100" value="50" class="slider-vol" oninput="musica.setVolumen(this.value)">
-                <p id="track-titulo">Cargando música...</p>
             </div>
         </div>
+    </div>
+</div>
     </header>
 
     <main class="contenedor-principal" id="vista-inicio">
