@@ -25,12 +25,24 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         height: '0', width: '0',
         videoId: ALMACEN.playlist[0].id,
-        playerVars: { 'origin': window.location.origin },
+        playerVars: { 
+            'origin': window.location.origin,
+            'autoplay': 1, // Intentar autoplay
+            'mute': 0 
+        },
         events: {
             'onReady': () => {
                 apiReady = true;
                 document.getElementById('track-titulo').innerText = ALMACEN.playlist[0].titulo;
+                // Intentamos play, aunque el navegador podría bloquearlo hasta el clic
+                player.playVideo(); 
             }
         }
     });
 }
+
+document.addEventListener('click', () => {
+    if (apiReady && player.getPlayerState() !== 1) {
+        player.playVideo();
+    }
+}, { once: true }); // Solo se ejecuta la primera vez que hace clic
