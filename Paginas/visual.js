@@ -62,5 +62,34 @@ renderMenu: () => {
         const p = document.getElementById('popover-musica');
         p.style.display = p.style.display === 'block' ? 'none' : 'block';
     }
+
+const ritmo = {
+    bpm: 128, // Cambia esto según tu canción
+    intervalo: null,
+
+    iniciar: () => {
+        // Calculamos los milisegundos por pulso: (60 / BPM) * 1000
+        const ms = (60 / ritmo.bpm) * 1000;
+        
+        ritmo.intervalo = setInterval(() => {
+            if (apiReady && player.getPlayerState() === 1) {
+                ritmo.efectoVisual();
+            }
+        }, ms);
+    },
+
+    efectoVisual: () => {
+        const contador = document.getElementById('contador-display');
+        
+        // Aplicamos una animación rápida de "pulso"
+        contador.style.transform = 'scale(1.05)';
+        contador.style.borderColor = 'var(--rosa)';
+        
+        setTimeout(() => {
+            contador.style.transform = 'scale(1)';
+            contador.style.borderColor = 'var(--rosa-suave)';
+        }, 100);
+    }
+};
 };
 ui.init();
