@@ -62,34 +62,47 @@ renderMenu: () => {
         const p = document.getElementById('popover-musica');
         p.style.display = p.style.display === 'block' ? 'none' : 'block';
     }
+};
 
 const ritmo = {
-    bpm: 128, // Cambia esto según tu canción
+    bpm: 128, 
     intervalo: null,
 
-    iniciar: () => {
-        // Calculamos los milisegundos por pulso: (60 / BPM) * 1000
-        const ms = (60 / ritmo.bpm) * 1000;
+    iniciar: (nuevoBpm) => {
+        if (nuevoBpm) ritmo.bpm = nuevoBpm;
+        if (ritmo.intervalo) clearInterval(ritmo.intervalo);
         
+        const ms = (60 / ritmo.bpm) * 1000;
         ritmo.intervalo = setInterval(() => {
-            if (apiReady && player.getPlayerState() === 1) {
-                ritmo.efectoVisual();
+            // Solo late si la música está sonando
+            if (apiReady && player && player.getPlayerState() === 1) {
+                ritmo.crearCorazon();
+                ritmo.pulsoContador();
             }
         }, ms);
     },
 
-    efectoVisual: () => {
+    pulsoContador: () => {
         const contador = document.getElementById('contador-display');
-        
-        // Aplicamos una animación rápida de "pulso"
-        contador.style.transform = 'scale(1.05)';
-        contador.style.borderColor = 'var(--rosa)';
-        
+        if (!contador) return;
+        contador.style.transform = 'scale(1.02)';
+        contador.style.borderColor = '#ff4d6d';
         setTimeout(() => {
             contador.style.transform = 'scale(1)';
-            contador.style.borderColor = 'var(--rosa-suave)';
-        }, 100);
+            contador.style.borderColor = '#ffb3c1';
+        }, 150);
+    },
+
+    crearCorazon: () => {
+        const corazon = document.createElement('div');
+        corazon.innerHTML = '❤️';
+        corazon.className = 'particula-ritmo';
+        corazon.style.left = Math.random() * 100 + 'vw';
+        document.body.appendChild(corazon);
+        
+        // Se elimina solo después de la animación
+        setTimeout(() => corazon.remove(), 2000);
     }
 };
-};
+
 ui.init();
