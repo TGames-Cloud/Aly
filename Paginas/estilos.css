@@ -50,9 +50,79 @@ body {
     animation: fadeIn 1s ease-in;
 }
 
+.btn-accion {
+    background: var(--rosa);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 77, 109, 0.2);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.btn-accion:hover {
+    background: #ff758f;
+    transform: scale(1.05);
+}
+
+.controles-musica button {
+    background: white;
+    color: var(--rosa);
+    border: 2px solid var(--rosa-suave);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.controles-musica button:hover {
+    background: var(--rosa);
+    color: white;
+    border-color: var(--rosa);
+}
+
+.slider-vol {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: var(--rosa-suave);
+    border-radius: 5px;
+    outline: none;
+    margin: 15px 0;
+}
+
+.slider-vol::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--rosa);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
 .contador-card {
-    background: white; border: 4px solid var(--rosa);
-    border-radius: 50px; display: inline-flex; padding: 25px; gap: 15px;
+    background: white;
+    border: 4px solid var(--rosa);
+    border-radius: 30px;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 90%;
+    margin: 0 auto;
 }
 
 .reloj-caja {
