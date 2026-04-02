@@ -141,14 +141,14 @@ body {
     display: flex; flex-direction: column;
 }
 
-.widget, .carpeta-item, .btn-accion, .carta-mini {
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.widget, .carpeta-item, .btn-accion, .carta-mini, .controles-musica button {
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Curva más suave */
     cursor: pointer;
 }
 
 .carpeta-item:hover, .widget:hover {
-    transform: translateY(-10px) scale(1.1);
-    filter: drop-shadow(0 10px 15px rgba(255, 77, 109, 0.3));
+    transform: translateY(-5px); /* Reducido de 10px a 5px */
+    filter: drop-shadow(0 5px 10px rgba(255, 77, 109, 0.2));
 }
 
 .carta-mini:hover {
@@ -156,8 +156,9 @@ body {
     box-shadow: 0 15px 30px rgba(255, 77, 109, 0.15);
 }
 
-.widget:active, .carpeta-item:active, .btn-accion:active {
-    transform: scale(0.92);
+.widget:active, .carpeta-item:active, .btn-accion:active, .controles-musica button:active {
+    transform: scale(0.96); /* Antes 0.92, ahora es más discreto */
+    filter: brightness(0.9);
 }
 
 #vista-inicio {
@@ -199,22 +200,21 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px; /* Espacio entre botones */
-    width: 100%;
+    gap: 15px;
+    padding: 10px 0;
 }
 
 .controles-musica button {
-    background: white;
-    border: 2px solid var(--rosa-suave);
+    background: #fff;
+    border: 1.5px solid var(--rosa-suave);
     color: var(--rosa);
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.2rem;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    font-size: 1rem;
 }
 
 .controles-musica button:active {
