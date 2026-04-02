@@ -69,27 +69,6 @@ body {
     transform: scale(1.05);
 }
 
-.controles-musica button {
-    background: white;
-    color: var(--rosa);
-    border: 2px solid var(--rosa-suave);
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.controles-musica button:hover {
-    background: var(--rosa);
-    color: white;
-    border-color: var(--rosa);
-}
-
 .slider-vol {
     -webkit-appearance: none;
     width: 100%;
@@ -191,10 +170,65 @@ body {
 }
 
 .controles-musica button:hover {
+    transform: scale(1.1);
     background: var(--rosa);
     color: white;
-    transform: scale(1.1);
+    border-color: var(--rosa);
 }
+
+.reproductor-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.musica-nombre {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--rosa);
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.controles-musica {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Espacio entre botones */
+    width: 100%;
+}
+
+.controles-musica button {
+    background: white;
+    border: 2px solid var(--rosa-suave);
+    color: var(--rosa);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.controles-musica button:active {
+    transform: scale(0.9);
+}
+
+.volumen-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.vol-icon { font-size: 1rem; color: var(--rosa-suave); }
 
 .lectura-cuerpo { overflow-y: auto; font-size: 1.2rem; line-height: 1.7; }
 .btn-leido { background: #2ecc71; color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; margin-top: 15px; }
