@@ -1,18 +1,24 @@
 let player;
 let apiReady = false;
+let musicaIniciada = false;
 
 const musica = {
     indice: 0,
+    
+    // Función para intentar reproducir
+    intentarReproducir: () => {
+        if (apiReady && player && !musicaIniciada) {
+            player.playVideo();
+            musicaIniciada = true;
+            console.log("Música activada por interacción.");
+        }
+    },
 
     playPause: () => {
-        if (!apiReady || !player) return;
+        if (!apiReady) return;
         const estado = player.getPlayerState();
-        // 1 = Reproduciendo, 2 = Pausado
-        if (estado === 1) {
-            player.pauseVideo();
-        } else {
-            player.playVideo();
-        }
+        if (estado === 1) player.pauseVideo(); 
+        else player.playVideo();
     },
 
     next: () => {
@@ -31,34 +37,29 @@ const musica = {
         const cancion = ALMACEN.playlist[musica.indice];
         player.loadVideoById(cancion.id);
         document.getElementById('track-titulo').innerText = cancion.titulo;
+        player.playVideo();
     },
 
-    setVolumen: (v) => {
-        if (apiReady && player) player.setVolume(v);
-    }
+    setVolumen: (v) => { if (apiReady) player.setVolume(v); }
 };
 
-// Función global que llama la API de YouTube
+// ACTIVADOR GLOBAL: En cuanto toque la pantalla, la música arranca
+document.addEventListener('click', musica.intentarReproducir, { once: true });
+document.addEventListener('touchstart', musica.intentarReproducir, { once: true });
+
 function onYouTubeIframeAPIReady() {
-    console.log("YouTube API cargando...");
     player = new YT.Player('player', {
-        height: '0',
-        width: '0',
+        height: '0', width: '0',
         videoId: ALMACEN.playlist[0].id,
-        playerVars: {
+        playerVars: { 
             'origin': window.location.origin,
-            'autoplay': 0,
-            'controls': 0
+            'autoplay': 1,
+            'mute': 0 
         },
         events: {
-            'onReady': (event) => {
+            'onReady': () => {
                 apiReady = true;
-                console.log("¡Música lista!");
                 document.getElementById('track-titulo').innerText = ALMACEN.playlist[0].titulo;
-            },
-            'onStateChange': (event) => {
-                // Si la canción termina (estado 0), pasar a la siguiente
-                if (event.data === 0) musica.next();
             }
         }
     });
