@@ -5,32 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuestra Historia</title>
     <link rel="stylesheet" href="Paginas/estilos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<header class="top-bar">
-    <div class="widget dinero-widget" onclick="ui.togglePresupuesto()">
-        <span class="icon">💰</span>
-        <div id="popover-dinero" class="popover">
-            <p>Presupuesto para hoy:</p>
-            <span id="monto-dinero" style="font-size: 1.5rem; color: var(--rosa); font-weight: bold;">Cargando...</span>
-        </div>
-    </div>
-
-    <div class="widget musica-widget" onclick="ui.toggleMusica()">
-        <span class="icon">🎵</span>
-        <div id="popover-musica" class="popover" onclick="event.stopPropagation()">
-            <div id="player"></div>
-            <div class="controles-musica">
-                <button onclick="musica.prev()">⏮</button>
-                <button onclick="musica.playPause()">⏯</button>
-                <button onclick="musica.next()">⏭</button>
+    <header class="top-bar">
+        <div class="widget dinero-widget" onclick="ui.togglePresupuesto()">
+            <span class="icon">💰</span>
+            <div id="popover-dinero" class="popover">
+                <p>Presupuesto para hoy:</p>
+                <span id="monto-dinero" class="resaltado">--</span>
             </div>
-            <input type="range" min="0" max="100" value="50" style="width: 100%;" oninput="musica.setVolumen(this.value)">
-            <p id="track-titulo" style="font-size: 0.9rem; margin-top: 10px; color: #666;"></p>
         </div>
-    </div>
-</header>
+
+        <div class="widget musica-widget" onclick="ui.toggleMusica()">
+            <span class="icon">🎵</span>
+            <div id="popover-musica" class="popover" onclick="event.stopPropagation()">
+                <div id="player"></div>
+                <div class="controles-musica">
+                    <button onclick="musica.prev()">⏮</button>
+                    <button onclick="musica.playPause()">⏯</button>
+                    <button onclick="musica.next()">⏭</button>
+                </div>
+                <input type="range" min="0" max="100" value="50" class="slider-vol" oninput="musica.setVolumen(this.value)">
+                <p id="track-titulo">Cargando música...</p>
+            </div>
+        </div>
+    </header>
 
     <main class="contenedor-principal" id="vista-inicio">
         <h1>Nuestra Historia</h1>
