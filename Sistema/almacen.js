@@ -7,7 +7,7 @@ const ALMACEN = {
 
     // Lista de reproducción (ID de YouTube y nombre)
     playlist: [
-        { id: "L0MK7qz13bU", titulo: "Frozen - Let It Go" },
+        { id: "XSqx8Ibkzrk&list=RDXSqx8Ibkzrk&start_radio=1", titulo: "Line Without a Hook" },
         { id: "dQw4w9WgXcQ", titulo: "Never Gonna Give You Up" },
         { id: "JF8BRgiW_v0", titulo: "Nuestra Canción" }
     ],
