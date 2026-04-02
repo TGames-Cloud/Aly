@@ -2,7 +2,7 @@
     --rosa: #ff4d6d;
     --rosa-suave: #ffb3c1;
     --crema: #fffdfa;
-    --oscuro: rgba(0, 0, 0, 0.93);
+    --oscuro: rgba(0, 0, 0, 0.95);
 }
 
 * { box-sizing: border-box; }
@@ -12,7 +12,6 @@ body {
     overflow: hidden;
 }
 
-/* TOP BAR */
 .top-bar {
     position: fixed; top: 20px; width: 100%;
     display: flex; justify-content: space-between; padding: 0 40px;
@@ -28,7 +27,6 @@ body {
 
 .widget:hover { transform: scale(1.1); }
 
-/* CORRECCIÓN DE PANELES */
 .popover {
     position: absolute; top: 80px; background: white;
     border: 3px solid var(--rosa); border-radius: 20px;
@@ -37,68 +35,66 @@ body {
     animation: slideIn 0.4s ease-out;
 }
 
-/* Dinero (Esquina Izquierda -> Abre a la derecha) */
 .dinero-widget .popover { left: 0; }
-
-/* Música (Esquina Derecha -> Abre a la IZQUIERDA) */
-.musica-widget .popover { right: 0; transform-origin: top right; }
+.musica-widget .popover { right: 0; } /* Abre hacia la izquierda desde la derecha */
 
 @keyframes slideIn {
     from { opacity: 0; transform: translateY(-20px) scale(0.9); }
     to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* REPRODUCTOR ESTILIZADO */
-.controles-musica { display: flex; justify-content: center; gap: 15px; margin: 15px 0; }
-.controles-musica button {
-    background: var(--rosa); color: white; border: none;
-    width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
-    transition: background 0.3s;
-}
-.controles-musica button:hover { background: #ff758f; }
+.resaltado { font-size: 1.5rem; color: var(--rosa); font-weight: bold; display: block; margin-top: 5px; }
 
-/* CONTADOR Y CARTAS */
 .contenedor-principal {
     margin-top: 120px; text-align: center; padding: 20px;
     animation: fadeIn 1s ease-in;
 }
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
 .contador-card {
-    background: rgba(255, 255, 255, 0.9);
-    border: 4px solid var(--rosa); border-radius: 50px;
-    display: inline-flex; padding: 30px; gap: 20px;
-    box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
+    background: white; border: 4px solid var(--rosa);
+    border-radius: 50px; display: inline-flex; padding: 25px; gap: 15px;
 }
 
 .reloj-caja {
     background: white; border: 2px solid var(--rosa-suave);
-    padding: 20px; border-radius: 25px; min-width: 100px;
-    transition: all 0.3s ease;
+    padding: 15px; border-radius: 20px; min-width: 90px;
 }
-.reloj-caja:hover { border-color: var(--rosa); transform: translateY(-5px); }
 
-/* DISEÑO DE CARTAS */
+.reloj-num { display: block; font-size: 2rem; font-weight: bold; color: var(--rosa); }
+.reloj-lab { color: #999; font-size: 0.7rem; font-weight: bold; }
+
+.grid-carpetas, .grid-cartas {
+    display: flex; justify-content: center; gap: 30px; margin-top: 40px; flex-wrap: wrap;
+}
+
 .carta-mini {
     background: white; border: 3px solid var(--rosa-suave);
-    padding: 25px; border-radius: 20px; width: 250px;
-    position: relative; cursor: pointer; text-align: left;
-    transition: all 0.3s ease;
-}
-.carta-mini:hover { 
-    transform: translateY(-10px) rotate(2deg); 
-    border-color: var(--rosa);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    padding: 20px; border-radius: 15px; width: 220px;
+    position: relative; cursor: pointer; transition: 0.3s;
 }
 
-/* OVERLAY LECTURA */
+.carta-mini:hover { transform: translateY(-10px); border-color: var(--rosa); }
+
+.tag-nueva {
+    position: absolute; top: -10px; right: -10px;
+    background: var(--rosa); color: white; padding: 4px 10px;
+    border-radius: 10px; font-size: 0.7rem; animation: latido 1.5s infinite;
+}
+
+#overlay-lectura {
+    position: fixed; inset: 0; background: var(--oscuro);
+    display: none; justify-content: center; align-items: center; z-index: 2000;
+}
+
 .carta-fisica {
     background: var(--crema); border: 5px solid var(--rosa);
-    width: 90%; max-width: 600px; height: 80vh;
-    padding: 50px; border-radius: 30px; position: relative;
+    width: 90%; max-width: 550px; height: 75vh;
+    padding: 40px; border-radius: 25px; position: relative;
     display: flex; flex-direction: column;
-    animation: zoomIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-@keyframes zoomIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.lectura-cuerpo { overflow-y: auto; font-size: 1.2rem; line-height: 1.7; }
+.btn-leido { background: #2ecc71; color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; margin-top: 15px; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes latido { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
