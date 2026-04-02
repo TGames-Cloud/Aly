@@ -65,43 +65,33 @@ renderMenu: () => {
 };
 
 const ritmo = {
-    bpm: 128, 
     intervalo: null,
 
-    iniciar: (nuevoBpm) => {
-        if (nuevoBpm) ritmo.bpm = nuevoBpm;
+    iniciar: (bpm) => {
         if (ritmo.intervalo) clearInterval(ritmo.intervalo);
+        const ms = (60 / bpm) * 1000;
         
-        const ms = (60 / ritmo.bpm) * 1000;
         ritmo.intervalo = setInterval(() => {
-            // Solo late si la música está sonando
-            if (apiReady && player && player.getPlayerState() === 1) {
-                ritmo.crearCorazon();
-                ritmo.pulsoContador();
+            if (apiReady && player.getPlayerState() === 1) {
+                ritmo.animar();
             }
         }, ms);
     },
 
-    pulsoContador: () => {
+    animar: () => {
         const contador = document.getElementById('contador-display');
-        if (!contador) return;
-        contador.style.transform = 'scale(1.02)';
-        contador.style.borderColor = '#ff4d6d';
-        setTimeout(() => {
-            contador.style.transform = 'scale(1)';
-            contador.style.borderColor = '#ffb3c1';
-        }, 150);
-    },
-
-    crearCorazon: () => {
+        if(contador) {
+            contador.style.transform = 'scale(1.03)';
+            setTimeout(() => contador.style.transform = 'scale(1)', 100);
+        }
+        
+        // Crear pequeño corazón flotante
         const corazon = document.createElement('div');
         corazon.innerHTML = '❤️';
-        corazon.className = 'particula-ritmo';
-        corazon.style.left = Math.random() * 100 + 'vw';
+        corazon.className = 'corazon-ritmo';
+        corazon.style.left = Math.random() * 90 + 5 + 'vw';
         document.body.appendChild(corazon);
-        
-        // Se elimina solo después de la animación
-        setTimeout(() => corazon.remove(), 2000);
+        setTimeout(() => corazon.remove(), 3000);
     }
 };
 
