@@ -52,8 +52,9 @@ const musica = {
         if(typeof ritmo !== 'undefined') ritmo.iniciar(cancion.bpm);
     },
     setVolumen: (v) => { if(apiReady) player.setVolume(v); }
+};
 
-    despertarReproductor: () => {
+despertarReproductor: () => {
         if (apiReady && player && !musicaYaCargada) {
             // Cargamos la canción pero la dejamos en pausa si prefieres
             // o playVideo() si quieres que arranque de una
@@ -67,7 +68,6 @@ const musica = {
             }
         }
     }
-};
 
 // Forzar inicio al primer clic (Crucial para Chrome/Safari)
 document.addEventListener('click', () => {
