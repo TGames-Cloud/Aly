@@ -1,22 +1,29 @@
 let player;
 let apiReady = false;
+let youtubeScriptCargado = false;
 
 // Esta función es sagrada, YouTube la busca para arrancar
 function onYouTubeIframeAPIReady() {
+    youtubeScriptCargado = true;
+    inicializarReproductor();
+}
+
+function inicializarReproductor() {
+    if (!ALMACEN || !ALMACEN.playlist) {
+        console.error("Almacen no cargado aún, reintentando...");
+        setTimeout(inicializarReproductor, 100);
+        return;
+    }
+
     player = new YT.Player('player', {
-        height: '0',
-        width: '0',
+        height: '0', width: '0',
         videoId: ALMACEN.playlist[0].id,
-        playerVars: {
-            'autoplay': 1,
-            'controls': 0,
-            'disablekb': 1,
-            'enablejsapi': 1,
-            'mute': 0
-        },
+        playerVars: { 'origin': window.location.origin, 'enablejsapi': 1 },
         events: {
-            'onReady': onPlayerReady,
-            'onStateChange': (e) => { if(e.data === 0) musica.next(); }
+            'onReady': () => { 
+                apiReady = true; 
+                document.getElementById('track-titulo').innerText = ALMACEN.playlist[0].titulo;
+            }
         }
     });
 }
