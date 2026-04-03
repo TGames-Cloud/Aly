@@ -1,5 +1,5 @@
 const ALMACEN = {
-    presupuesto: "B/. 50.00", //
+    presupuesto: "B/. 00.00", //
     fechaRelacion: new Date(2024, 11, 3, 17, 43), //
     playlist: [
         { id: "D6XR9GfBfwY", 
