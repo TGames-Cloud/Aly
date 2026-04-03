@@ -266,21 +266,40 @@ body {
     h1 { font-size: 1.8rem; margin: 20px 0; }
 
     /* El contador ahora se apilará o será más pequeño */
-    .contador-card {
-        padding: 10px;
-        gap: 8px;
-        flex-wrap: wrap; /* Permite que los cuadros bajen si no caben */
-        border-radius: 20px;
-        width: 95%;
+.contador-card {
+        display: flex !important;
+        flex-wrap: wrap !important; /* Permite que los cuadros bajen a la siguiente fila */
+        justify-content: center !important;
+        gap: 10px !important;
+        padding: 15px 10px !important;
+        width: 90% !important;
+        margin: 0 auto !important;
+        border-width: 2px !important; /* Borde más fino para que no ocupe espacio */
     }
 
-    .unidad-tiempo {
-        min-width: 60px;
-        padding: 8px 5px;
+.unidad-tiempo {
+        background: #fff5f7;
+        border: 1px solid var(--rosa-suave);
+        border-radius: 15px;
+        min-width: 70px; /* Tamaño fijo para que queden simétricos */
+        flex: 1 1 70px;  /* Se estiran para llenar el espacio */
+        padding: 10px 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-    .numero { font-size: 1.2rem; }
-    .etiqueta { font-size: 0.7rem; }
+.numero {
+        font-size: 1.3rem !important; /* Número más legible en móvil */
+        color: var(--rosa);
+        font-weight: bold;
+    }
+.etiqueta {
+        font-size: 0.65rem !important;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #888;
+    }
 
     /* Ajustar las carpetas para que queden de 2 en 2 o centradas */
     .grid-carpetas {
