@@ -50,6 +50,16 @@ body {
     animation: fadeIn 1s ease-in;
 }
 
+.dinero-widget .popover,
+.musica-widget .popover {
+    display: none; /* Ocultos por defecto */
+}
+
+.dinero-widget.active .popover,
+.musica-widget.active .popover {
+    display: flex !important;
+}
+
 .btn-accion {
     background: var(--rosa);
     color: white;
