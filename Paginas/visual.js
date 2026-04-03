@@ -106,3 +106,12 @@ const ritmo = {
     }
 };
 ui.init();
+ui.toggleMusica = function() {
+    const widget = document.querySelector('.musica-widget');
+    widget.classList.toggle('active');
+    
+    // Si se abre, intentamos despertar el audio por si acaso
+    if(widget.classList.contains('active')) {
+        musica.despertarReproductor();
+    }
+};
