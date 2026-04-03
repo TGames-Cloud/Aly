@@ -259,3 +259,62 @@ body {
     font-weight: bold !important;
     cursor: pointer !important;
 }
+
+/* --- RESPONSIVE DESIGN (MÓVILES) --- */
+@media screen and (max-width: 600px) {
+    /* Reducir el tamaño de la tipografía general */
+    h1 { font-size: 1.8rem; margin: 20px 0; }
+
+    /* El contador ahora se apilará o será más pequeño */
+    .contador-card {
+        padding: 10px;
+        gap: 8px;
+        flex-wrap: wrap; /* Permite que los cuadros bajen si no caben */
+        border-radius: 20px;
+        width: 95%;
+    }
+
+    .unidad-tiempo {
+        min-width: 60px;
+        padding: 8px 5px;
+    }
+
+    .numero { font-size: 1.2rem; }
+    .etiqueta { font-size: 0.7rem; }
+
+    /* Ajustar las carpetas para que queden de 2 en 2 o centradas */
+    .grid-carpetas {
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .carpeta-item span {
+        font-size: 50px !important; /* Iconos un poco más pequeños */
+    }
+
+    /* REPRODUCTOR MÓVIL: Muy importante */
+    .musica-widget .popover {
+        position: fixed; /* Se vuelve un panel fijo en la pantalla */
+        top: auto;
+        bottom: 20px;
+        right: 10px;
+        left: 10px;
+        width: auto;
+        transform: none !important;
+        box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+    }
+
+    /* Hacer los botones de la música más fáciles de tocar */
+    .controles-musica button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4rem;
+    }
+
+    /* La carta de lectura debe ocupar casi toda la pantalla */
+    .carta-fisica {
+        width: 90%;
+        max-height: 80vh;
+        padding: 20px;
+    }
+}
