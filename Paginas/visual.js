@@ -107,11 +107,22 @@ const ritmo = {
 };
 ui.init();
 ui.toggleMusica = function() {
+    // Cerramos el de dinero si está abierto para que no se traslapen
+    document.querySelector('.dinero-widget').classList.remove('active');
+    
     const widget = document.querySelector('.musica-widget');
     widget.classList.toggle('active');
     
-    // Si se abre, intentamos despertar el audio por si acaso
+    // Si se activa, nos aseguramos de que el audio despierte
     if(widget.classList.contains('active')) {
-        musica.despertarReproductor();
+        if(typeof musica !== 'undefined') musica.despertarReproductor();
     }
+};
+
+ui.togglePresupuesto = function() {
+    // Cerramos el de música si está abierto
+    document.querySelector('.musica-widget').classList.remove('active');
+    
+    const widget = document.querySelector('.dinero-widget');
+    widget.classList.toggle('active');
 };
