@@ -100,11 +100,6 @@ ui.toggleMusica = function() {
     
     const widget = document.querySelector('.musica-widget');
     widget.classList.toggle('active');
-    
-    // Si se activa, nos aseguramos de que el audio despierte
-    if(widget.classList.contains('active')) {
-        if(typeof musica !== 'undefined') musica.despertarReproductor();
-    }
 };
 
 ui.togglePresupuesto = function() {
