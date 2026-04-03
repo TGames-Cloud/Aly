@@ -57,7 +57,19 @@
     </div>
 
     <script src="Sistema/almacen.js?v=2"></script>
-    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://www.youtube.com/iframe_api" async></script>
+
+<script>
+    // Esta función es el estándar de oro. 
+    // YouTube la busca globalmente. No la metas dentro de otros archivos.
+    function onYouTubeIframeAPIReady() {
+        console.log("YouTube respondió correctamente");
+        // Aquí llamas a la función de tu archivo musica.js
+        if(typeof inicializarReproductor === 'function') {
+            inicializarReproductor();
+        }
+    }
+</script>
     <script src="Sistema/musica.js?v=2"></script>
     <script src="Paginas/visual.js?v=2"></script>
 </body>
