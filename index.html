@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuestra Historia</title>
-    <link rel="stylesheet" href="Paginas/estilos.css">
+    <link rel="stylesheet" href="Paginas/estilos.css?v=2">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -13,30 +13,26 @@
         <div class="widget dinero-widget" onclick="ui.togglePresupuesto()">
             <span class="icon">💰</span>
             <div id="popover-dinero" class="popover">
-                <p>Presupuesto para hoy:</p>
+                <p>Presupuesto hoy:</p>
                 <span id="monto-dinero" class="resaltado">--</span>
             </div>
         </div>
 
-<div class="widget musica-widget" onclick="ui.toggleMusica()">
-    <span class="icon">🎵</span>
-    <div id="popover-musica" class="popover" onclick="event.stopPropagation()">
-        <div id="player"></div> <div class="reproductor-layout">
-            <p id="track-titulo" class="musica-nombre">Cargando...</p>
-            
-            <div class="controles-musica">
-                <button onclick="musica.prev()" title="Anterior">⏮</button>
-                <button onclick="musica.playPause()" id="btn-play-pause" title="Play/Pausa">⏯</button>
-                <button onclick="musica.next()" title="Siguiente">⏭</button>
-            </div>
-
-            <div class="volumen-container">
-                <span class="vol-icon">🔊</span>
-                <input type="range" min="0" max="100" value="50" class="slider-vol" oninput="musica.setVolumen(this.value)">
+        <div class="widget musica-widget" onclick="ui.toggleMusica()">
+            <span class="icon">🎵</span>
+            <div id="popover-musica" class="popover" onclick="event.stopPropagation()">
+                <div id="player"></div>
+                <div class="reproductor-layout">
+                    <p id="track-titulo" class="musica-nombre">Esperando...</p>
+                    <div class="controles-musica">
+                        <button onclick="musica.prev()">⏮</button>
+                        <button onclick="musica.playPause()">⏯</button>
+                        <button onclick="musica.next()">⏭</button>
+                    </div>
+                    <input type="range" min="0" max="100" value="50" class="slider-vol" oninput="musica.setVolumen(this.value)">
+                </div>
             </div>
         </div>
-    </div>
-</div>
     </header>
 
     <main class="contenedor-principal" id="vista-inicio">
@@ -45,24 +41,24 @@
         <div class="grid-carpetas" id="menu-carpetas"></div>
     </main>
 
-<main class="contenedor-principal" id="vista-carpeta" style="display: none;">
-    <button class="btn-accion" onclick="ui.irAlInicio()">← Volver al Menú</button>
-    <h2 id="titulo-seccion-actual"></h2>
-    <div class="grid-cartas" id="contenedor-cartas"></div>
-</main>
+    <main class="contenedor-principal" id="vista-carpeta" style="display: none;">
+        <button class="btn-accion" onclick="ui.irAlInicio()">← Volver</button>
+        <h2 id="titulo-seccion-actual"></h2>
+        <div class="grid-cartas" id="contenedor-cartas"></div>
+    </main>
 
     <div id="overlay-lectura">
         <div class="carta-fisica">
             <span class="cerrar-btn" onclick="ui.cerrarCarta()">✕</span>
             <h2 id="lectura-titulo"></h2>
-            <div class="lectura-cuerpo" id="lectura-texto" onscroll="ui.checkScroll(this)"></div>
-            <button id="btn-marcar-leido" class="btn-leido" onclick="ui.cerrarCarta()">MARCAR COMO LEÍDO</button>
+            <div class="lectura-cuerpo" id="lectura-texto"></div>
+            <button class="btn-leido" onclick="ui.cerrarCarta()">MARCAR COMO LEÍDO</button>
         </div>
     </div>
 
-<link rel="stylesheet" href="Paginas/estilos.css?v=1.1"> <script src="https://www.youtube.com/iframe_api"></script>
-<script src="Sistema/almacen.js?v=1.1"></script>
-<script src="Sistema/musica.js?v=1.1"></script>
-<script src="Paginas/visual.js?v=1.1"></script>
+    <script src="Sistema/almacen.js?v=2"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="Sistema/musica.js?v=2"></script>
+    <script src="Paginas/visual.js?v=2"></script>
 </body>
 </html>
