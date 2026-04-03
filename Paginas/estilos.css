@@ -260,6 +260,29 @@ body {
     cursor: pointer !important;
 }
 
+.musica-widget .popover {
+    position: fixed !important;
+    /* Lo fijamos a la derecha, igual que el dinero suele estar a la izquierda o viceversa */
+    top: 80px !important; 
+    right: 20px !important;
+    width: 300px !important;
+    background: white !important;
+    border: 3px solid #ff4d6d !important;
+    border-radius: 25px !important;
+    padding: 20px !important;
+    box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2) !important;
+    z-index: 10000 !important;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    transform: none !important; /* BLOQUEAMOS EL MOVIMIENTO */
+}
+
+    /* Clase activa para mostrarlo */
+.musica-widget.active .popover {
+    display: flex !important;
+}
+
 /* --- RESPONSIVE DESIGN (MÓVILES) --- */
 @media screen and (max-width: 600px) {
     /* Reducir el tamaño de la tipografía general */
@@ -329,31 +352,6 @@ body {
         padding: 20px;
     }
 
-.musica-widget .popover {
-        position: fixed !important;
-        bottom: 20px !important;
-        left: 5% !important;
-        right: 5% !important;
-        width: 90% !important;
-        height: auto !important;
-        background: white !important;
-        border: 3px solid #ff4d6d !important; /* El borde rosa fuerte de tu captura */
-        border-radius: 25px !important;
-        padding: 20px !important;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
-        display: none; 
-        z-index: 10000;
-        top: auto !important;
-        transform: none !important;
-    }
-
-    /* Clase activa para mostrarlo */
-    .musica-widget.active .popover {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-    }
-
     /* Ajuste para que los botones no se amontonen */
     .reproductor-layout {
         flex-direction: column;
@@ -375,5 +373,13 @@ body {
         width: 100% !important;
         accent-color: #ff4d6d !important;
         margin-top: 15px !important;
+    }
+
+    .musica-widget .popover {
+        top: auto !important; /* Quitamos el anclaje de arriba */
+        bottom: 20px !important; /* Lo anclamos abajo para el pulgar */
+        left: 5% !important;
+        right: 5% !important;
+        width: 90% !important;
     }
 }
