@@ -51,14 +51,32 @@ const ui = {
         document.getElementById('overlay-lectura').style.display = 'flex';
     },
     cerrarCarta: () => document.getElementById('overlay-lectura').style.display = 'none',
-    togglePresupuesto: () => {
-        const p = document.getElementById('popover-dinero');
-        p.style.display = p.style.display === 'block' ? 'none' : 'block';
-        document.getElementById('monto-dinero').innerText = ALMACEN.presupuesto; //
+togglePresupuesto: function() {
+        const widgetDinero = document.querySelector('.dinero-widget');
+        const widgetMusica = document.querySelector('.musica-widget');
+
+        // 1. Cerramos la música si está abierta para evitar solapamientos
+        widgetMusica.classList.remove('active');
+
+        // 2. Alternamos el estado del dinero
+        widgetDinero.classList.toggle('active');
+        
+        console.log("Estado dinero:", widgetDinero.classList.contains('active'));
     },
-    toggleMusica: () => {
-        const p = document.getElementById('popover-musica');
-        p.style.display = p.style.display === 'block' ? 'none' : 'block';
+toggleMusica: function() {
+        const widgetDinero = document.querySelector('.dinero-widget');
+        const widgetMusica = document.querySelector('.musica-widget');
+
+        // 1. Cerramos el dinero si está abierto
+        widgetDinero.classList.remove('active');
+
+        // 2. Alternamos la música
+        widgetMusica.classList.toggle('active');
+
+        // 3. Si se abre, activamos el audio (por si el navegador lo bloqueó)
+        if(widgetMusica.classList.contains('active')) {
+            if(typeof musica !== 'undefined') musica.despertarReproductor();
+        }
     }
 };
 
