@@ -17,9 +17,20 @@ const ui = {
             {v: anios, l: 'Años'}, {v: meses, l: 'Meses'}, {v: dias, l: 'Días'},
             {v: Math.floor((diff/36e5)%24), l: 'Hrs'}, {v: Math.floor((diff/6e4)%60), l: 'Min'}, {v: Math.floor((diff/1e3)%60), l: 'Seg'}
         ];
-        document.getElementById('contador-display').innerHTML = stats.map(s => `
-            <div class="reloj-caja"><span class="reloj-num">${s.v}</span><span class="reloj-lab">${s.l}</span></div>
-        `).join('');
+        const diff = ahora - inicio;
+        const tiempos = ui.ui.calcularTiempos(diff);
+        
+        const display = document.getElementById('contador-display');
+        if (display) {
+            display.innerHTML = `
+                <div class="unidad-tiempo"><span class="numero">${tiempos.anios}</span><span class="etiqueta">Años</span></div>
+                <div class="unidad-tiempo"><span class="numero">${tiempos.meses}</span><span class="etiqueta">Meses</span></div>
+                <div class="unidad-tiempo"><span class="numero">${tiempos.dias}</span><span class="etiqueta">Días</span></div>
+                <div class="unidad-tiempo"><span class="numero">${tiempos.horas}</span><span class="etiqueta">Hrs</span></div>
+                <div class="unidad-tiempo"><span class="numero">${tiempos.minutos}</span><span class="etiqueta">Min</span></div>
+                <div class="unidad-tiempo"><span class="numero">${tiempos.segundos}</span><span class="etiqueta">Seg</span></div>
+            `;
+        }
     },
 renderMenu: () => {
     const menu = document.getElementById('menu-carpetas');
@@ -61,18 +72,25 @@ renderMenu: () => {
     toggleMusica: () => {
         const p = document.getElementById('popover-musica');
         p.style.display = p.style.display === 'block' ? 'none' : 'block';
+    },
+    calcularTiempos: (ms) => {
+        // Lógica de conversión de milisegundos a unidades de tiempo
+        let segundos = Math.floor(ms / 1000);
+        let minutos = Math.floor(segundos / 60);
+        let horas = Math.floor(minutos / 60);
+        let dias = Math.floor(horas / 24);
+
+        // Aquí puedes añadir lógica más compleja para meses y años exactos
+        return {
+            anios: Math.floor(dias / 365),
+            meses: Math.floor((dias % 365) / 30),
+            dias: dias % 30,
+            horas: horas % 24,
+            minutos: minutos % 60,
+            segundos: segundos % 60
+        };
     }
 };
-
-const html = `
-    <div class="unidad-tiempo"><span class="numero">${tiempos.anios}</span><span class="etiqueta">Años</span></div>
-    <div class="unidad-tiempo"><span class="numero">${tiempos.meses}</span><span class="etiqueta">Meses</span></div>
-    <div class="unidad-tiempo"><span class="numero">${tiempos.dias}</span><span class="etiqueta">Días</span></div>
-    <div class="unidad-tiempo"><span class="numero">${tiempos.horas}</span><span class="etiqueta">Hrs</span></div>
-    <div class="unidad-tiempo"><span class="numero">${tiempos.minutos}</span><span class="etiqueta">Min</span></div>
-    <div class="unidad-tiempo"><span class="numero">${tiempos.segundos}</span><span class="etiqueta">Seg</span></div>
-`;
-document.getElementById('contador-display').innerHTML = html;
 
 const ritmo = {
     intervalo: null,
@@ -105,6 +123,7 @@ const ritmo = {
     }
 };
 ui.init();
+ui.actualizarReloj();
 ui.toggleMusica = function() {
     // Cerramos el de dinero si está abierto para que no se traslapen
     document.querySelector('.dinero-widget').classList.remove('active');
