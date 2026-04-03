@@ -20,17 +20,6 @@ const ui = {
         document.getElementById('contador-display').innerHTML = stats.map(s => `
             <div class="reloj-caja"><span class="reloj-num">${s.v}</span><span class="reloj-lab">${s.l}</span></div>
         `).join('');
-
-        const html = `
-    <div class="unidad-tiempo"><span class="numero">${tiempos.anios}</span><span class="etiqueta">Años</span></div>
-    <div class="unidad-tiempo"><span class="numero">${tiempos.meses}</span><span class="etiqueta">Meses</span></div>
-    <div class="unidad-tiempo"><span class="numero">${tiempos.dias}</span><span class="etiqueta">Días</span></div>
-    <div class="unidad-tiempo"><span class="numero">${tiempos.horas}</span><span class="etiqueta">Hrs</span></div>
-    <div class="unidad-tiempo"><span class="numero">${tiempos.minutos}</span><span class="etiqueta">Min</span></div>
-    <div class="unidad-tiempo"><span class="numero">${tiempos.segundos}</span><span class="etiqueta">Seg</span></div>
-`;
-document.getElementById('contador-display').innerHTML = html;
-
     },
 renderMenu: () => {
     const menu = document.getElementById('menu-carpetas');
@@ -74,6 +63,16 @@ renderMenu: () => {
         p.style.display = p.style.display === 'block' ? 'none' : 'block';
     }
 };
+
+const html = `
+    <div class="unidad-tiempo"><span class="numero">${tiempos.anios}</span><span class="etiqueta">Años</span></div>
+    <div class="unidad-tiempo"><span class="numero">${tiempos.meses}</span><span class="etiqueta">Meses</span></div>
+    <div class="unidad-tiempo"><span class="numero">${tiempos.dias}</span><span class="etiqueta">Días</span></div>
+    <div class="unidad-tiempo"><span class="numero">${tiempos.horas}</span><span class="etiqueta">Hrs</span></div>
+    <div class="unidad-tiempo"><span class="numero">${tiempos.minutos}</span><span class="etiqueta">Min</span></div>
+    <div class="unidad-tiempo"><span class="numero">${tiempos.segundos}</span><span class="etiqueta">Seg</span></div>
+`;
+document.getElementById('contador-display').innerHTML = html;
 
 const ritmo = {
     intervalo: null,
