@@ -1,37 +1,31 @@
 let player;
 let apiReady = false;
-let youtubeScriptCargado = false;
 
-// Esta función es sagrada, YouTube la busca para arrancar
+// YouTube llama a esta función solo cuando termina de cargar su API
 function onYouTubeIframeAPIReady() {
-    youtubeScriptCargado = true;
-    inicializarReproductor();
+    console.log("API de YouTube detectada. Inicializando...");
+    verificarYCrearPlayer();
 }
 
-function inicializarReproductor() {
-    if (!ALMACEN || !ALMACEN.playlist) {
-        console.error("Almacen no cargado aún, reintentando...");
-        setTimeout(inicializarReproductor, 100);
+function verificarYCrearPlayer() {
+    // Si ALMACEN no existe todavía, esperamos un poco
+    if (typeof ALMACEN === 'undefined') {
+        setTimeout(verificarYCrearPlayer, 500);
         return;
     }
 
     player = new YT.Player('player', {
         height: '0', width: '0',
         videoId: ALMACEN.playlist[0].id,
-        playerVars: { 'origin': window.location.origin, 'enablejsapi': 1 },
+        playerVars: { 'autoplay': 1, 'controls': 0, 'enablejsapi': 1, 'origin': window.location.origin },
         events: {
-            'onReady': () => { 
-                apiReady = true; 
+            'onReady': () => {
+                apiReady = true;
                 document.getElementById('track-titulo').innerText = ALMACEN.playlist[0].titulo;
-            }
+            },
+            'onStateChange': (e) => { if(e.data === 0) musica.next(); }
         }
     });
-}
-
-function onPlayerReady(event) {
-    apiReady = true;
-    console.log("Sistema de audio en línea");
-    document.getElementById('track-titulo').innerText = ALMACEN.playlist[0].titulo;
 }
 
 const musica = {
@@ -42,26 +36,28 @@ const musica = {
         if(typeof ritmo !== 'undefined') ritmo.iniciar(ALMACEN.playlist[musica.indice].bpm);
     },
     next: () => {
+        if(!apiReady) return;
         musica.indice = (musica.indice + 1) % ALMACEN.playlist.length;
         musica.actualizar();
     },
     prev: () => {
+        if(!apiReady) return;
         musica.indice = (musica.indice - 1 + ALMACEN.playlist.length) % ALMACEN.playlist.length;
         musica.actualizar();
     },
     actualizar: () => {
-        const c = ALMACEN.playlist[musica.indice];
-        player.loadVideoById(c.id);
-        document.getElementById('track-titulo').innerText = c.titulo;
-        if(typeof ritmo !== 'undefined') ritmo.iniciar(c.bpm);
+        const cancion = ALMACEN.playlist[musica.indice];
+        player.loadVideoById(cancion.id);
+        document.getElementById('track-titulo').innerText = cancion.titulo;
+        if(typeof ritmo !== 'undefined') ritmo.iniciar(cancion.bpm);
     },
     setVolumen: (v) => { if(apiReady) player.setVolume(v); }
 };
 
-// Activar al primer clic si el navegador bloqueó el autoplay
-document.addEventListener('mousedown', () => {
+// Forzar inicio al primer clic (Crucial para Chrome/Safari)
+document.addEventListener('click', () => {
     if(apiReady && player.getPlayerState() !== 1) {
         player.playVideo();
         if(typeof ritmo !== 'undefined') ritmo.iniciar(ALMACEN.playlist[musica.indice].bpm);
     }
-}, {once: true});
+}, { once: true });
