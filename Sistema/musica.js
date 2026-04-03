@@ -79,4 +79,5 @@ document.addEventListener('click', () => {
 
 document.addEventListener('mousedown', musica.despertarReproductor, { once: true });
 document.addEventListener('keydown', musica.despertarReproductor, { once: true });
+document.addEventListener('click', musica.despertarReproductor, { once: true });
 document.addEventListener('touchstart', musica.despertarReproductor, { once: true });
