@@ -333,17 +333,6 @@ body {
     .carpeta-item span {
         font-size: 50px !important; /* Iconos un poco más pequeños */
     }
-    
-    /* Hacer los botones de la música más fáciles de tocar */
-.controles-musica button {
-        background: white !important;
-        border: 2px solid #ffb3c1 !important; /* Rosa suave */
-        color: #ff4d6d !important;
-        width: 50px !important;
-        height: 50px !important;
-        border-radius: 50% !important;
-        font-size: 1.2rem !important;
-    }
 
     /* La carta de lectura debe ocupar casi toda la pantalla */
     .carta-fisica {
@@ -352,34 +341,4 @@ body {
         padding: 20px;
     }
 
-    /* Ajuste para que los botones no se amontonen */
-    .reproductor-layout {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .musica-nombre {
-        color: #ff4d6d !important;
-        font-weight: bold !important;
-        margin-bottom: 15px !important;
-        font-size: 1.1rem !important;
-    }
-
-    .controles-musica {
-        gap: 15px !important;
-    }
-
-    .slider-vol {
-        width: 100% !important;
-        accent-color: #ff4d6d !important;
-        margin-top: 15px !important;
-    }
-
-    .musica-widget .popover {
-        top: auto !important; /* Quitamos el anclaje de arriba */
-        bottom: 20px !important; /* Lo anclamos abajo para el pulgar */
-        left: 5% !important;
-        right: 5% !important;
-        width: 90% !important;
-    }
 }
