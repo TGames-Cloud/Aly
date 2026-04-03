@@ -121,9 +121,21 @@ ui.toggleMusica = function() {
 };
 
 ui.togglePresupuesto = function() {
-    // Cerramos el de música si está abierto
-    document.querySelector('.musica-widget').classList.remove('active');
-    
-    const widget = document.querySelector('.dinero-widget');
-    widget.classList.toggle('active');
+    const widgetDinero = document.querySelector('.dinero-widget');
+    const widgetMusica = document.querySelector('.musica-widget');
+    const montoDisplay = document.getElementById('monto-dinero');
+
+    // Cerramos la música
+    widgetMusica.classList.remove('active');
+
+    // Antes de mostrar, inyectamos el dato
+    if (typeof ALMACEN !== 'undefined' && ALMACEN.presupuesto) {
+        // Aquí puedes poner el monto que calculamos antes
+        montoDisplay.innerText = `$${ALMACEN.presupuesto}`;
+    } else {
+        montoDisplay.innerText = "Cargando...";
+    }
+
+    // Mostramos el widget
+    widgetDinero.classList.toggle('active');
 };
