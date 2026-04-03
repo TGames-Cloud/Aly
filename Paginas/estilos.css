@@ -336,4 +336,33 @@ body {
         max-height: 80vh;
         padding: 20px;
     }
+
+    .musica-widget .popover {
+        position: fixed !important;
+        top: auto !important; /* Cancelamos cualquier posición superior */
+        bottom: 20px !important; /* Lo anclamos abajo */
+        left: 5% !important;
+        right: 5% !important;
+        width: 90% !important;
+        transform: none !important; /* Eliminamos traslaciones que causan bugs */
+        z-index: 99999;
+        background: white;
+        padding: 15px;
+        border-radius: 20px;
+        box-shadow: 0 -10px 25px rgba(255, 77, 109, 0.15);
+        display: none; /* Se controla con el click */
+    }
+
+    /* Clase activa para mostrarlo */
+    .musica-widget.active .popover {
+        display: block !important;
+    }
+
+    /* Ajuste para que los botones no se amontonen */
+    .reproductor-layout {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    
 }
