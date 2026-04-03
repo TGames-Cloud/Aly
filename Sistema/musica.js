@@ -52,6 +52,21 @@ const musica = {
         if(typeof ritmo !== 'undefined') ritmo.iniciar(cancion.bpm);
     },
     setVolumen: (v) => { if(apiReady) player.setVolume(v); }
+
+    despertarReproductor: () => {
+        if (apiReady && player && !musicaYaCargada) {
+            // Cargamos la canción pero la dejamos en pausa si prefieres
+            // o playVideo() si quieres que arranque de una
+            player.playVideo(); 
+            musicaYaCargada = true;
+            console.log("Reproductor despertado globalmente.");
+            
+            // Si el sistema de ritmo existe, lo iniciamos
+            if (typeof ritmo !== 'undefined') {
+                ritmo.iniciar(ALMACEN.playlist[musica.indice].bpm);
+            }
+        }
+    }
 };
 
 // Forzar inicio al primer clic (Crucial para Chrome/Safari)
@@ -61,3 +76,7 @@ document.addEventListener('click', () => {
         if(typeof ritmo !== 'undefined') ritmo.iniciar(ALMACEN.playlist[musica.indice].bpm);
     }
 }, { once: true });
+
+document.addEventListener('mousedown', musica.despertarReproductor, { once: true });
+document.addEventListener('keydown', musica.despertarReproductor, { once: true });
+document.addEventListener('touchstart', musica.despertarReproductor, { once: true });
