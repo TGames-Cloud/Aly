@@ -2,52 +2,64 @@ const ALMACEN = {
     presupuesto: "B/. 00.00", //
     fechaRelacion: new Date(2024, 11, 3, 17, 43), //
     playlist: [
-        { id: "8JW6qzPCkE8", 
-         titulo: "Line Without a Hook",
-         bpm: 190
-        },
-        { id: "24u3NoPvgMw", 
-         titulo: "Heather",
-         bpm: 102
+        {
+            archivo: "Audio/Line Without a Hook.mp3", 
+            titulo: "Line Without a Hook",
+            artista: "Ricky Montgomery",
+            bpm: 190
         },
         {
-            id: "iXjUF4BBFq4",
+            archivo: "Audio/Heather.mp3", 
+            titulo: "Heather",
+            artista: "Conan Gray",
+            bpm: 102
+        },
+        {
+            archivo: "Audio/Memories.mp3",
             titulo: "Memories",
+            artista: "Conan Gray",
             bpm: 113
         },
         {
-            id: "P8Jj2mp0dG8",
+            archivo: "Audio/Niño.mp3",
             titulo: "Niño",
+            artista: "Milo J",
             bpm: 128
         },
         {
-            id: "65yd5WEK0EA",
+            archivo: "Audio/The Winner Takes It All.mp3",
             titulo: "The winner takes It All",
+            artista: "ABBA",
             bpm: 126
         },
         {
-            id: "EuzDbYXIAXI",
+            archivo: "Audio/Her.mp3",
             titulo: "Her",
+            artista: "JVKE",
             bpm: 144
         },
         {
-            id: "pCPYb7KPoUc",
+            archivo: "Audio/Doma.mp3",
             titulo: "Doma",
+            artista: "",
             bpm: 137
         },
         {
-            id: "cLjLcA8S2-U",
+            archivo: "Audio/Inmortal.mp3",
             titulo: "Inmortal",
+            artista: "Romeo Santos",
             bpm: 124
         },
         {
-            id: "IHF57-Ia-cE",
+            archivo: "Audio/Casa En El Aire",
             titulo: "Casa en el Aire",
+            artista: "Arevalo",
             bpm: 76
         },
         {
-            id: "L2EmaRBEOx0",
+            archivo: "Audio/Luma",
             titulo: "Luma",
+            artista: "Esperon",
             bpm: 108
         }
     ],
