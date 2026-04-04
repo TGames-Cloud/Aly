@@ -13,16 +13,41 @@ const musica = {
 
     cargar: (idx) => {
         audioPlayer.src = playlistActual[idx].archivo;
-        audioPlayer.load(); // Vital para evitar el NotSupportedError en móvil
-        document.getElementById('track-titulo').innerText = playlistActual[idx].titulo;
+        audioPlayer.load(); 
+        
+        const titulo = document.getElementById('track-titulo');
+        if (titulo) titulo.innerText = playlistActual[idx].titulo;
     },
 
     arrancarFondo: () => {
         if (!yaInteractuo) {
             yaInteractuo = true;
-            audioPlayer.play().then(() => musica.fade(0, musica.volMax));
+            audioPlayer.play()
+                .then(() => musica.fade(0, musica.volMax))
+                .catch(e => console.log("Esperando más interacción para arrancar el audio."));
         }
     },
+
+    // --- ESTAS ERAN LAS FUNCIONES QUE FALTABAN ---
+    playPause: () => {
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+            musica.fade(audioPlayer.volume, musica.volMax);
+        } else {
+            musica.fade(audioPlayer.volume, 0, () => audioPlayer.pause());
+        }
+    },
+
+    prev: () => {
+        musica.fade(audioPlayer.volume, 0, () => {
+            // Lógica para retroceder dando la vuelta si estamos en la primera
+            musica.indice = (musica.indice - 1 + playlistActual.length) % playlistActual.length;
+            musica.cargar(musica.indice);
+            audioPlayer.play();
+            musica.fade(0, musica.volMax);
+        });
+    },
+    // ---------------------------------------------
 
     next: () => {
         musica.fade(audioPlayer.volume, 0, () => {
@@ -46,5 +71,8 @@ const musica = {
     }
 };
 
+// Pasar a la siguiente automáticamente cuando termine
 audioPlayer.addEventListener('ended', musica.next);
+
+// Iniciar
 musica.iniciarSistema();
