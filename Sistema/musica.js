@@ -70,10 +70,28 @@ const musica = {
         }, 100);
     },
 
-    actualizarLetra: () => {
+buscarLetra: async (artista, titulo) => {
         const cajaLetra = document.getElementById('caja-letras');
-        if(cajaLetra) {
-            cajaLetra.innerText = playlistActual[musica.indice].letra || "";
+        cajaLetra.innerText = "Buscando letra...";
+        cajaLetra.style.display = "block";
+
+        try {
+            // Consultamos a LRCLIB
+            const response = await fetch(`https://lrclib.net/api/get?artist=${encodeURIComponent(artista)}&track=${encodeURIComponent(titulo)}`);
+            
+            if (response.ok) {
+                const data = await response.json();
+                // Preferimos 'syncedLyrics' (con tiempo) o 'plainLyrics' (texto puro)
+                const letra = data.syncedLyrics || data.plainLyrics || "Letra no disponible.";
+                
+                // Si es sincronizada, podrías procesarla, pero por ahora mostramos el texto
+                cajaLetra.innerText = letra.replace(/\[\d+:\d+.\d+\]/g, ""); // Limpiamos los tiempos [00:12.34]
+            } else {
+                cajaLetra.innerText = "No se encontró la letra.";
+            }
+        } catch (error) {
+            console.error("Error con LRCLIB:", error);
+            cajaLetra.innerText = "Error al cargar letra.";
         }
     }
 };
