@@ -352,3 +352,11 @@ body {
     }
 
 }
+
+.lectura-cuerpo {
+    white-space: pre-wrap; /* ¡ESTA ES LA MAGIA! Respeta los saltos de línea de tu JS */
+    line-height: 1.8; /* Mejora la visión del usuario dándole espacio al texto */
+    font-size: 1.1rem;
+    color: #444; /* Un gris oscuro cansa menos la vista que el negro puro */
+    padding: 10px;
+}
